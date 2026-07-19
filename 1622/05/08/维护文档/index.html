@@ -27,7 +27,7 @@
 <meta property="og:description" content="Hexo 博客文章发布与维护技术文档本文档基于 Hexo + GitHub Pages 环境，详细说明博客文章的创建、编辑、发布、更新及删除等完整生命周期操作。适用于已搭建好 Hexo 博客的维护者。  1. 前置条件 本地已安装 Node.js、Git 和 Hexo CLI。 博客项目已初始化，并与 GitHub Pages 仓库关联完成。 基础命令可在终端正常执行。   若尚未搭建环境，请先参">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1622-05-07T22:19:33.000Z">
-<meta property="article:modified_time" content="2026-07-19T05:53:04.012Z">
+<meta property="article:modified_time" content="2026-07-19T06:08:42.554Z">
 <meta property="article:author" content="Wu Yuchen">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="使用AI辅助">
@@ -450,34 +450,8 @@
 <h3 id="Q2-修改日期后旧链接失效怎么办？"><a href="#Q2-修改日期后旧链接失效怎么办？" class="headerlink" title="Q2: 修改日期后旧链接失效怎么办？"></a>Q2: 修改日期后旧链接失效怎么办？</h3><p>如上文所述，为文章设置固定的 <code>permalink</code> 可防止链接变化。对于已失效链接，可考虑使用插件（如 <code>hexo-generator-alias</code>）进行重定向。</p>
 <h3 id="Q3-如何批量修改多篇文章？"><a href="#Q3-如何批量修改多篇文章？" class="headerlink" title="Q3: 如何批量修改多篇文章？"></a>Q3: 如何批量修改多篇文章？</h3><p>可直接在 <code>source/_posts/</code> 中使用文本编辑器的批量替换功能修改 Front-matter，完成后重新生成部署。务必提前备份。</p>
 <hr>
-<h2 id="9-日常操作速查表"><a href="#9-日常操作速查表" class="headerlink" title="9. 日常操作速查表"></a>9. 日常操作速查表</h2><table>
-<thead>
-<tr>
-<th>操作</th>
-<th>命令</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>新建文章</td>
-<td><code>hexo new &quot;标题&quot;</code></td>
-</tr>
-<tr>
-<td>本地预览</td>
-<td><code>hexo server</code></td>
-</tr>
-<tr>
-<td>生成并部署</td>
-<td><code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code></td>
-</tr>
-<tr>
-<td>仅生成静态文件</td>
-<td><code>hexo clean &amp;&amp; hexo g</code></td>
-</tr>
-<tr>
-<td>删除文章后更新</td>
-<td>手动删除文件，再 <code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code></td>
-</tr>
-</tbody></table>
+<h2 id="9-日常操作速查表"><a href="#9-日常操作速查表" class="headerlink" title="9. 日常操作速查表"></a>9. 日常操作速查表</h2><p>| 操作 | 命令 |</p>
+<p>|——|——|<br>| 新建文章 | <code>hexo new &quot;标题&quot;</code> |<br>| 本地预览 | <code>hexo server</code> |<br>| 生成并部署 | <code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code> |<br>| 仅生成静态文件 | <code>hexo clean &amp;&amp; hexo g</code> |<br>| 删除文章后更新 | 手动删除文件，再 <code>hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</code> |</p>
 
                 
               </div>
