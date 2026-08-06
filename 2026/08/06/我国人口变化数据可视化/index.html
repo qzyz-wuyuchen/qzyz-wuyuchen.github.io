@@ -1,0 +1,1227 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jpg">
+  <link rel="icon" href="/img/avatar.jpg">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Wu Yuchen">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="我国人口变化数据可视化不记得哪一天了，读到  知乎原文 知乎原文  两篇文章，都提到我国人口变化的趋势，尤其是人口数量与增长率的变化。为了更直观地理解这些数据，我决定使用Python进行数据可视化。 STEP1 国家统计局「人口-总人口」数据获取（retrieve_data.py）目标从 https:&#x2F;&#x2F;data.stats.gov.cn&#x2F;dg&#x2F;website&#x2F;page.html#&#x2F;pc&#x2F;nati">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我国人口变化数据可视化">
+<meta property="og:url" content="https://qzyz-wuyuchen.github.io/2026/08/06/%E6%88%91%E5%9B%BD%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/index.html">
+<meta property="og:site_name" content="wyc.blog">
+<meta property="og:description" content="我国人口变化数据可视化不记得哪一天了，读到  知乎原文 知乎原文  两篇文章，都提到我国人口变化的趋势，尤其是人口数量与增长率的变化。为了更直观地理解这些数据，我决定使用Python进行数据可视化。 STEP1 国家统计局「人口-总人口」数据获取（retrieve_data.py）目标从 https:&#x2F;&#x2F;data.stats.gov.cn&#x2F;dg&#x2F;website&#x2F;page.html#&#x2F;pc&#x2F;nati">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF.png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF.png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E7%94%B7%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF.png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E5%A5%B3%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF.png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E7%94%B7%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF.png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E5%A5%B3%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF.png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E7%94%B7%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF(2020%E4%BB%A5%E6%9D%A5).png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E5%A5%B3%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF(2020%E4%BB%A5%E6%9D%A5).png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E7%94%B7%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF(2020%E4%BB%A5%E6%9D%A5).png">
+<meta property="og:image" content="https://qzyz-wuyuchen.github.io/img/%E5%A5%B3%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF(2020%E4%BB%A5%E6%9D%A5).png">
+<meta property="article:published_time" content="2026-08-06T07:30:44.000Z">
+<meta property="article:modified_time" content="2026-08-06T07:51:48.306Z">
+<meta property="article:author" content="Wu Yuchen">
+<meta property="article:tag" content="CSV">
+<meta property="article:tag" content="Matplotlib">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="事实核查">
+<meta property="article:tag" content="人口变化">
+<meta property="article:tag" content="使用AI辅助">
+<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="数据可视化">
+<meta property="article:tag" content="数据处理">
+<meta property="article:tag" content="统计学">
+<meta property="article:tag" content="网络爬虫">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://qzyz-wuyuchen.github.io/img/%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF.png">
+  
+  
+  
+  <title>我国人口变化数据可视化 - wyc.blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"qzyz-wuyuchen.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>wyc.blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-archive-fill"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-category-fill"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/about/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-user-fill"></i>
+                  <span>关于</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="我国人口变化数据可视化"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-06 15:30" pubdate>
+          2026年8月6日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          59 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">我国人口变化数据可视化</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="我国人口变化数据可视化"><a href="#我国人口变化数据可视化" class="headerlink" title="我国人口变化数据可视化"></a>我国人口变化数据可视化</h1><p>不记得哪一天了，读到</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/2057529995908608135/answer/2066287533827347149">知乎原文</a></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/2065203654836204192">知乎原文</a></li>
+</ul>
+<p>两篇文章，都提到我国人口变化的趋势，尤其是人口数量与增长率的变化。为了更直观地理解这些数据，我决定使用Python进行数据可视化。</p>
+<h2 id="STEP1-国家统计局「人口-总人口」数据获取（retrieve-data-py）"><a href="#STEP1-国家统计局「人口-总人口」数据获取（retrieve-data-py）" class="headerlink" title="STEP1 国家统计局「人口-总人口」数据获取（retrieve_data.py）"></a>STEP1 国家统计局「人口-总人口」数据获取（retrieve_data.py）</h2><h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>从 <code>https://data.stats.gov.cn/dg/website/page.html#/pc/national/yearData</code> 自动获取<br><strong>年度数据 → 人口 → 总人口</strong> 的全部指标数据（1949 年至今，结束年份默认为当前年份前一年），保存为 <code>data.csv</code>。</p>
+<h3 id="站点结构分析"><a href="#站点结构分析" class="headerlink" title="站点结构分析"></a>站点结构分析</h3><p><code>data.stats.gov.cn/dg</code> 是国家统计局 2024 年后上线的新版数据门户，是一个 <strong>Vue 单页应用（SPA）</strong>：</p>
+<ul>
+<li>页面 HTML（<code>page.html</code>）只是一个空壳（<code>&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;</code>），所有内容由 JavaScript 渲染；</li>
+<li>数据通过 AJAX 接口动态加载，<strong>直接抓取 HTML 拿不到任何数据</strong>；</li>
+<li>主要 JS 包：<code>static/js/project/dsf-pc.js</code>、<code>subPage.js</code>、<code>dsf-vendors.js</code>、<br><code>modules/dataview/js/dsf-dataview.common.js</code> 等。</li>
+</ul>
+<h4 id="发现接口的方法"><a href="#发现接口的方法" class="headerlink" title="发现接口的方法"></a>发现接口的方法</h4><ol>
+<li>用 curl 拉取页面 HTML，确认是 SPA 空壳；</li>
+<li>下载全部 JS bundle，用正则搜索 <code>api</code>、<code>query</code> 等关键词，定位到数据接口域名路径；</li>
+<li>用 Puppeteer（无头浏览器）打开真实页面：<ul>
+<li>点击指标树「人口」→「总人口」；</li>
+<li>在页面上下文中注入 <code>fetch</code> &#x2F; <code>XMLHttpRequest</code> 钩子，<strong>捕获真实的网络请求</strong>；</li>
+<li>拿到接口 URL 与请求体格式；</li>
+</ul>
+</li>
+<li>用 curl 直接重放请求，验证接口可用并可返回更大年份范围。</li>
+</ol>
+<blockquote>
+<p>注：旧版门户接口 <code>data.stats.gov.cn/easyquery.htm</code> 已被 WAF 拦截（HTTP 403，UrlACL 规则），<br>且页面提供的年份选择器只有「最近 5&#x2F;10&#x2F;15 年」，直接改接口参数即可获取全量历史数据（默认截止当前年份前一年）。</p>
+</blockquote>
+<h3 id="关键接口"><a href="#关键接口" class="headerlink" title="关键接口"></a>关键接口</h3><h4 id="1-指标树查询（GET）"><a href="#1-指标树查询（GET）" class="headerlink" title="1. 指标树查询（GET）"></a>1. 指标树查询（GET）</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">/publicrelease/web/external/new/queryIndexTreeAsync?pid=&lt;父节点ID&gt;&amp;code=3<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><code>pid</code> 为空 &#x3D; 根节点；<code>code=3</code> &#x3D; 年度数据目录；</li>
+<li>返回节点数组，含 <code>_id</code>、<code>name</code>、<code>type</code>、<code>isLeaf</code> 字段。</li>
+</ul>
+<p><strong>树链路</strong>（逐级展开，程序动态发现，不硬编码 ID）：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs text">根 (pid=&quot;&quot;)<br>└─ 年度数据 (884c062607104a91967b22742537f44f)   ← 即 esData 请求中的 rootId<br>   └─ 人口 (040faf60f9b64535957e242e62a18a85)<br>      └─ 总人口 (6331ad868e8b4f55b8e9b6e765609ce1)  ← isLeaf=True, 含数据指标<br></code></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：节点 ID 是站点内部生成的 UUID，<strong>会随站点改版变化</strong>，因此程序必须动态发现而不是写死。</p>
+</blockquote>
+<h4 id="2-指标列表查询（GET）"><a href="#2-指标列表查询（GET）" class="headerlink" title="2. 指标列表查询（GET）"></a>2. 指标列表查询（GET）</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs http">/publicrelease/web/external/new/queryIndicatorsByCid?cid=6331ad868e8b4f55b8e9b6e765609ce1&amp;dt=1949-2025&amp;name=<br></code></pre></td></tr></table></figure>
+
+<p>返回 <code>{&quot;data&quot;:{&quot;total&quot;:5,&quot;list&quot;:[{_id, i_showname, _name, du_name, ...}]}}</code>，<br>「总人口」目录下共 5 个指标：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>单位</th>
+<th>指标 ID</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>年末总人口</td>
+<td>万人</td>
+<td>806083491dbe46a08995783945a30b9d</td>
+</tr>
+<tr>
+<td>男性人口</td>
+<td>万人</td>
+<td>b808a4131bd041c4abc87b52385cd578</td>
+</tr>
+<tr>
+<td>女性人口</td>
+<td>万人</td>
+<td>30d59b42875145c696883366172bb3d1</td>
+</tr>
+<tr>
+<td>城镇人口</td>
+<td>万人</td>
+<td>07e1e3444cd34c43b4fd749f060bba5f</td>
+</tr>
+<tr>
+<td>乡村人口</td>
+<td>万人</td>
+<td>2dd9894936d448fcb88605863d90d85c</td>
+</tr>
+</tbody></table>
+<h4 id="3-数据查询（POST，核心）"><a href="#3-数据查询（POST，核心）" class="headerlink" title="3. 数据查询（POST，核心）"></a>3. 数据查询（POST，核心）</h4><figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http">POST /publicrelease/web/external/stream/esData<br><span class="hljs-attribute">Content-Type</span><span class="hljs-punctuation">: </span>application/json<br></code></pre></td></tr></table></figure>
+
+<p>请求体：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;cid&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;6331ad868e8b4f55b8e9b6e765609ce1&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;indicatorIds&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;806083491dbe46a08995783945a30b9d&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;b808a4131bd041c4abc87b52385cd578&quot;</span><span class="hljs-punctuation">,</span><br>                   <span class="hljs-string">&quot;30d59b42875145c696883366172bb3d1&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-string">&quot;07e1e3444cd34c43b4fd749f060bba5f&quot;</span><span class="hljs-punctuation">,</span><br>                   <span class="hljs-string">&quot;2dd9894936d448fcb88605863d90d85c&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;daCatalogId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;das&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">&#123;</span><span class="hljs-attr">&quot;text&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;全国&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;000000000000&quot;</span><span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;showType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1&quot;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;dts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">&quot;1949YY-2025YY&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;rootId&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;884c062607104a91967b22742537f44f&quot;</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>要点：</p>
+<ul>
+<li><strong><code>dts</code>（时间范围）格式：<code>&quot;起始YY-结束YY&quot;</code></strong>，如 <code>&quot;1949YY-2025YY&quot;</code>，支持全量年份；<br>而页面上只有「最近 5&#x2F;10&#x2F;15 年」选项，这是直接调接口的最大优势；</li>
+<li><code>das</code> 为地区维度，<code>000000000000</code> 表示全国；</li>
+<li>响应：<code>{&quot;data&quot;: [{&quot;code&quot;: &quot;2025YY&quot;, &quot;name&quot;: &quot;2025年&quot;, &quot;values&quot;: [{_id, _name, value, ...}]}, ...]}</code>，<br>每年一个对象，<code>values</code> 内按指标 ID 对应数值。</li>
+</ul>
+<h3 id="数据处理与校验"><a href="#数据处理与校验" class="headerlink" title="数据处理与校验"></a>数据处理与校验</h3><ol>
+<li><strong>解析</strong>：按年份遍历 <code>data</code> 数组，用指标 <code>_id</code> 建立 年份 → 各指标数值 的映射；</li>
+<li><strong>排序</strong>：年份升序（接口返回为降序）；</li>
+<li><strong>交叉校验</strong>（程序内置，仅警告不阻断）：<ul>
+<li>男性人口 + 女性人口 &#x3D; 年末总人口；</li>
+<li>城镇人口 + 乡村人口 &#x3D; 年末总人口；</li>
+<li>1962 年存在官方舍入差异（34517+32778&#x3D;67295 vs 67296，差 1），为源数据特性；</li>
+</ul>
+</li>
+<li><strong>写出</strong>：<code>data.csv</code>，UTF-8 <strong>带 BOM</strong>（Excel 可直接打开不乱码），<br>表头 <code>年份,年末总人口 (万人),男性人口 (万人),女性人口 (万人),城镇人口 (万人),乡村人口 (万人)</code>。</li>
+</ol>
+<h3 id="数据口径说明（官方）"><a href="#数据口径说明（官方）" class="headerlink" title="数据口径说明（官方）"></a>数据口径说明（官方）</h3><ul>
+<li><strong>数据范围</strong>：1949 – 2025 年（77 年 × 5 指标 &#x3D; 385 个数值，无缺漏）；<br>结束年份由程序按「当前年份 − 1」动态计算，站点数据更新后范围会自动延伸；</li>
+<li>1981 年及以前人口数据为<strong>户籍统计数</strong>；1982、1990、2000、2010、2020 年为<strong>人口普查数据推算数</strong>；<br>其余年份为<strong>年度人口抽样调查推算数据</strong>；</li>
+<li>总人口和按性别分人口中<strong>包括现役军人</strong>，按城乡分人口中现役军人<strong>计入城镇人口</strong>；</li>
+<li>年末人口数指每年 12 月 31 日 24 时的人口数；全国人口总数<strong>未包括港澳台及海外华侨</strong>。</li>
+</ul>
+<h3 id="复现"><a href="#复现" class="headerlink" title="复现"></a>复现</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">python project/man/retrieve_data.py                <span class="hljs-comment"># 默认 1949 → 当前年份-1, 写入 data.csv</span><br>python project/man/retrieve_data.py --start 2000 --end 2025   <span class="hljs-comment"># 自定义年份</span><br>python project/man/retrieve_data.py --output out.csv          <span class="hljs-comment"># 自定义输出路径</span><br></code></pre></td></tr></table></figure>
+
+<p>程序特点：</p>
+<ul>
+<li><strong>纯 Python 标准库</strong>（<code>urllib</code>），无需安装第三方依赖；</li>
+<li><strong>动态发现指标树</strong>，站点改版更新节点 ID 后仍可运行；</li>
+<li>请求带 User-Agent &#x2F; Referer，失败自动重试（3 次退避），请求间有 0.3s 间隔防限流。</li>
+</ul>
+<h2 id="STEP2-中国人口图表绘制（draw-charts-py）"><a href="#STEP2-中国人口图表绘制（draw-charts-py）" class="headerlink" title="STEP2 中国人口图表绘制（draw_charts.py）"></a>STEP2 中国人口图表绘制（draw_charts.py）</h2><h3 id="1-任务与输出文件"><a href="#1-任务与输出文件" class="headerlink" title="1. 任务与输出文件"></a>1. 任务与输出文件</h3><p>数据来源：<code>data.csv</code>（1949—2025，共 77 年，单位<strong>万人</strong>）。</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>任务</th>
+<th>输出文件</th>
+<th>图表类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>总人口变化趋势</td>
+<td><code>人口变化趋势.png</code></td>
+<td>折线 + 浅色填充 + 峰值标注</td>
+</tr>
+<tr>
+<td>2</td>
+<td>总人口增长率（含统计）</td>
+<td><code>人口增长率趋势.png</code></td>
+<td>柱状图 + 零线 + 统计框</td>
+</tr>
+<tr>
+<td>3</td>
+<td>男性人口变化</td>
+<td><code>男性人口变化趋势.png</code></td>
+<td>折线</td>
+</tr>
+<tr>
+<td>4</td>
+<td>女性人口变化</td>
+<td><code>女性人口变化趋势.png</code></td>
+<td>折线</td>
+</tr>
+<tr>
+<td>5</td>
+<td>男性增长率（含统计）</td>
+<td><code>男性人口增长率趋势.png</code></td>
+<td>柱状图</td>
+</tr>
+<tr>
+<td>6</td>
+<td>女性增长率（含统计）</td>
+<td><code>女性人口增长率趋势.png</code></td>
+<td>柱状图</td>
+</tr>
+<tr>
+<td>7</td>
+<td>自 2020 以来男性人口</td>
+<td><code>男性人口变化趋势(2020以来).png</code></td>
+<td>断轴折线 + 逐年标注</td>
+</tr>
+<tr>
+<td>8</td>
+<td>自 2020 以来女性人口</td>
+<td><code>女性人口变化趋势(2020以来).png</code></td>
+<td>断轴折线 + 逐年标注</td>
+</tr>
+<tr>
+<td>9</td>
+<td>自 2020 以来男性增长率</td>
+<td><code>男性人口增长率趋势(2020以来).png</code></td>
+<td>柱状图</td>
+</tr>
+<tr>
+<td>10</td>
+<td>自 2020 以来女性增长率</td>
+<td><code>女性人口增长率趋势(2020以来).png</code></td>
+<td>柱状图</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="2-核心实现要点"><a href="#2-核心实现要点" class="headerlink" title="2. 核心实现要点"></a>2. 核心实现要点</h3><h4 id="2-1-数据读取"><a href="#2-1-数据读取" class="headerlink" title="2.1 数据读取"></a>2.1 数据读取</h4><ul>
+<li><code>csv</code> 模块读取，编码 <code>utf-8-sig</code>（带 BOM）。</li>
+<li>人口单位为「万人」，与 data.csv 一致。</li>
+</ul>
+<h4 id="2-2-增长率"><a href="#2-2-增长率" class="headerlink" title="2.2 增长率"></a>2.2 增长率</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">增长率(t) = (P(t) - P(t-1)) / P(t-1) × 100%<br></code></pre></td></tr></table></figure>
+
+<p>首年（1949）无环比数据，记为 <code>None</code>，作图时剔除。</p>
+<h4 id="2-3-统计信息（平均值-方差-标准差）"><a href="#2-3-统计信息（平均值-方差-标准差）" class="headerlink" title="2.3 统计信息（平均值 &#x2F; 方差 &#x2F; 标准差）"></a>2.3 统计信息（平均值 &#x2F; 方差 &#x2F; 标准差）</h4><ul>
+<li>采用<strong>总体统计</strong>（分母为 N）：<code>statistics.mean</code>、<code>pvariance</code>、<code>pstdev</code>。</li>
+<li>统计区间 &#x3D; 图中展示的年份区间。首年无增长率，实际统计年份比标题多展示一年（如总人口图标题 1949—2025，统计为 1950—2025）。</li>
+<li>2020 以来的增长率用 2019 作为基线（<code>growth_rate(male)[i20:]</code>，i20 为 2020 的索引）。</li>
+</ul>
+<h4 id="2-4-增长率图用柱状图（直方图）"><a href="#2-4-增长率图用柱状图（直方图）" class="headerlink" title="2.4 增长率图用柱状图（直方图）"></a>2.4 增长率图用柱状图（直方图）</h4><ul>
+<li>需求：「增长率图改为直方图」。</li>
+<li>实现：<code>ax.bar(xs, ys, width=0.8, color, alpha=0.88)</code> + <code>axhline(0)</code> 零增长参考线。</li>
+<li>统计框：右上角 <code>text(0.985, 0.975)</code>，<code>bbox</code> 圆角白底描边。</li>
+</ul>
+<h4 id="2-5-人口数量图-Y-轴从-0-开始"><a href="#2-5-人口数量图-Y-轴从-0-开始" class="headerlink" title="2.5 人口数量图 Y 轴从 0 开始"></a>2.5 人口数量图 Y 轴从 0 开始</h4><ul>
+<li>需求：「避免产生从 0 开始或下降到 0 的错觉」。</li>
+<li>实现：<code>annotate_peak</code> 中 <code>set_ylim(0, max*1.12)</code>，峰值标注放在 <code>max*1.055</code> 高度处；峰值位于左 1&#x2F;3 时标签放右侧，否则放左侧，避免遮挡。</li>
+<li>用 <code>FuncFormatter</code> 给 Y 轴刻度加千分位（<code>72,357</code>）。</li>
+</ul>
+<hr>
+<h3 id="3-断轴图（任务-7、8）——重点与踩坑"><a href="#3-断轴图（任务-7、8）——重点与踩坑" class="headerlink" title="3. 断轴图（任务 7、8）——重点与踩坑"></a>3. 断轴图（任务 7、8）——重点与踩坑</h3><p>2020 以来数据区间极窄（男性 71,685—72,357，女性 68,804—68,969），若沿用 Y 轴从 0 开始的整段坐标，数据会压成一条直线。解决方案：<strong>断轴图</strong>。</p>
+<h4 id="3-1-结构（两段堆叠子图）"><a href="#3-1-结构（两段堆叠子图）" class="headerlink" title="3.1 结构（两段堆叠子图）"></a>3.1 结构（两段堆叠子图）</h4><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs text">[标题]<br>[数据面板（上半，height_ratios=5）]   ← 放大数据所在区间 + 浅色填充 + 逐年数值标注<br>╲╱ ╲╱ ╲╱                             ← 断轴斜线（两段交界）<br>[0 基线段（下半，height_ratios=1）]    ← 仅标 0，保持 Y 轴从 0 开始的语义<br>2020 2021 ... 2025                    ← 年份标签，图的最底部<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li>子图参数：<code>plt.subplots(2, 1, sharex=True, figsize=(10,6), dpi=150, gridspec_kw={&quot;height_ratios&quot;:[5,1]})</code></li>
+<li>数据面板 ylim &#x3D; <code>(min-pad, max+pad)</code>，<code>pad = 区间跨度 × 0.18</code>；基线段 ylim &#x3D; <code>(0, 数据面板下缘)</code>。</li>
+</ul>
+<h4 id="3-2-断轴绘制"><a href="#3-2-断轴绘制" class="headerlink" title="3.2 断轴绘制"></a>3.2 断轴绘制</h4><ul>
+<li>隐藏内侧脊线：<code>ax_data.spines[&quot;bottom&quot;]</code> 与 <code>ax_base.spines[&quot;top&quot;]</code> 都不可见。</li>
+<li>斜线标记：<code>plot([0,1],[0,0], transform=transAxes, marker=[(-1,-0.45),(1,0.45)], clip_on=False)</code>，上下两段各画一条。</li>
+</ul>
+<h4 id="3-3-刻度与格式"><a href="#3-3-刻度与格式" class="headerlink" title="3.3 刻度与格式"></a>3.3 刻度与格式</h4><ul>
+<li>数据面板用 <code>FixedLocator</code> 手动定刻度，步长从 <code>(50, 100, 200, 500)</code> 中取「能容纳 ≤5 个刻度」的第一个；刻度值保证落在面板内。</li>
+<li>基线段只标 <code>0</code>，用 <code>FuncFormatter</code> 加千分位。</li>
+<li>X 轴用 <code>FixedLocator(years)</code> 精确锁定数据年份。</li>
+</ul>
+<h4 id="3-4-踩坑记录（按修复顺序）"><a href="#3-4-踩坑记录（按修复顺序）" class="headerlink" title="3.4 踩坑记录（按修复顺序）"></a>3.4 踩坑记录（按修复顺序）</h4><ol>
+<li><strong>直线问题</strong>：整段 0 起点坐标轴导致窄区间数据压成直线 → 改为断轴。</li>
+<li><strong>零刻度位置反了</strong>：最初基线段在上、数据在下，零刻度线出现在 72,400&#x2F;68,975 的<strong>上方</strong>（读法违反直觉）→ 交换面板顺序，数据在上、0 基线在下。</li>
+<li><strong>越界刻度</strong>：<code>MaxNLocator</code> 生成了面板外的刻度（71,500&#x2F;72,500 等），标签渲染到面板外面 → 改用 <code>FixedLocator</code> + 自算步长。</li>
+<li><strong>年份标签位置</strong>：年份最初在顶部数据面板（断轴上方），随后又出现 2019&#x2F;2026 越界年份 → <code>sharex=True</code> 把 X 标签放到最底部的 0 基线段，年份最终落在断轴之下、图的最底部。</li>
+<li><strong>断轴下方无填充</strong>：浅色填充只画在数据面板（填到数据面板下缘），断轴以下视觉断开 → 基线段补一条 <code>fill_between(years, y_data[0], 0, alpha=0.10)</code>，与上方填充在断轴交界处无缝衔接。</li>
+<li><strong>数据线裁剪残迹</strong>：曾尝试在基线段画数据线，因数据在视野外留下 1px 抗锯齿残迹 → 基线段<strong>不画数据线</strong>，只画整片填充。</li>
+</ol>
+<h4 id="3-5-逐年数值标注（最终需求）"><a href="#3-5-逐年数值标注（最终需求）" class="headerlink" title="3.5 逐年数值标注（最终需求）"></a>3.5 逐年数值标注（最终需求）</h4><ul>
+<li>需求：「折线标记每年的具体人数，而不是只标 2020 年的」。</li>
+<li>实现：去掉单点峰值箭头标注，遍历每年画圆点 <code>plot(xi, yi, &quot;o&quot;, markersize=4.5)</code> + 数值标签 <code>annotate(f&quot;{yi:,.0f}&quot;, xytext=(0,6), textcoords=&quot;offset points&quot;, ha=&quot;center&quot;, va=&quot;bottom&quot;, fontsize=9)</code>。</li>
+<li>标签置于数据点正上方 6px，避免遮挡折线与刻度；相邻年份间隔大（≈260px），6 个标签不重叠。</li>
+</ul>
+<hr>
+<h3 id="4-图表规范（dataviz-校验通过）"><a href="#4-图表规范（dataviz-校验通过）" class="headerlink" title="4. 图表规范（dataviz 校验通过）"></a>4. 图表规范（dataviz 校验通过）</h3><table>
+<thead>
+<tr>
+<th>角色</th>
+<th>颜色</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总人口（蓝）</td>
+<td><code>#2a78d6</code></td>
+</tr>
+<tr>
+<td>男性（深蓝）</td>
+<td><code>#1c5cab</code></td>
+</tr>
+<tr>
+<td>女性（粉）</td>
+<td><code>#e87ba4</code></td>
+</tr>
+<tr>
+<td>网格线（细）</td>
+<td><code>#e1e0d9</code></td>
+</tr>
+<tr>
+<td>坐标轴</td>
+<td><code>#c3c2b7</code></td>
+</tr>
+<tr>
+<td>主墨色</td>
+<td><code>#0b0b0b</code></td>
+</tr>
+<tr>
+<td>次要墨色（刻度&#x2F;标注）</td>
+<td><code>#52514e</code></td>
+</tr>
+<tr>
+<td>图表面</td>
+<td><code>#fcfcfb</code></td>
+</tr>
+</tbody></table>
+<ul>
+<li>中文字体：<code>SimHei</code>（<code>rcParams[&quot;font.sans-serif&quot;]</code>），<code>axes.unicode_minus=False</code> 避免负号显示为方块。</li>
+<li>单序列图不加图例（色彩语义已由标题与 y 轴表达）。</li>
+<li>统一风格函数 <code>style_ax</code>：隐藏上&#x2F;右脊线，网格只画 Y 向，<code>set_axisbelow(True)</code>。</li>
+</ul>
+<hr>
+<h3 id="5-统计值核对（独立验证，与图内一致）"><a href="#5-统计值核对（独立验证，与图内一致）" class="headerlink" title="5. 统计值核对（独立验证，与图内一致）"></a>5. 统计值核对（独立验证，与图内一致）</h3><table>
+<thead>
+<tr>
+<th>区间</th>
+<th>平均值</th>
+<th>方差</th>
+<th>标准差</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总人口 1950—2025</td>
+<td>1.2661</td>
+<td>0.8362</td>
+<td>0.9144</td>
+</tr>
+<tr>
+<td>男性 1950—2025</td>
+<td>1.2424</td>
+<td>0.9436</td>
+<td>0.9714</td>
+</tr>
+<tr>
+<td>女性 1950—2025</td>
+<td>1.2916</td>
+<td>0.8075</td>
+<td>0.8986</td>
+</tr>
+<tr>
+<td>男性 2020—2025（n&#x3D;6）</td>
+<td>-0.0818</td>
+<td>0.0607</td>
+<td>0.2464</td>
+</tr>
+<tr>
+<td>女性 2020—2025（n&#x3D;6）</td>
+<td>-0.0399</td>
+<td>0.0113</td>
+<td>0.1065</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="6-验证方法"><a href="#6-验证方法" class="headerlink" title="6. 验证方法"></a>6. 验证方法</h3><p>底层模型不具备原生识图能力，因此采用以下间接验证手段：</p>
+<ol>
+<li><strong>结构验证（文本级）</strong>：<code>matplotlib</code> 图对象直接检查——文本列表、圆点数、断轴基线段文本是否为空、刻度位置等（比像素精确）。</li>
+<li><strong>像素验证（PIL）</strong>：<code>Image.open</code> + 逐像素扫描，检查系列色像素是否全部落在数据面板内、基线段填充平均色是否符合「表面色 × 0.9 + 系列色 × 0.1」的预期混合、年份标签是否位于最底部。(deepseek没有原生视觉识别)</li>
+<li><strong>独立重算</strong>：用 numpy 重新计算统计值，与图内统计框核对（保证统计口径一致，如 2020 的增长率以 2019 为基线）。</li>
+<li><strong>字体警告检查</strong>：脚本 stderr 无缺字警告即中文字体正常。</li>
+</ol>
+<hr>
+<h3 id="7-复现方式"><a href="#7-复现方式" class="headerlink" title="7. 复现方式"></a>7. 复现方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> D:/wuyuchen/work_ai/project/man<br>python draw_charts.py     <span class="hljs-comment"># 重新生成全部 10 张 PNG</span><br></code></pre></td></tr></table></figure>
+
+<p>依赖：Python 3.13+、matplotlib 3.10+、Pillow（仅验证用）、SimHei 字体。</p>
+<h2 id="STEP3-中国人口图表展示"><a href="#STEP3-中国人口图表展示" class="headerlink" title="STEP3 中国人口图表展示"></a>STEP3 中国人口图表展示</h2><ul>
+<li><img src="/img/%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF.png" srcset="/img/loading.gif" lazyload alt="人口变化趋势"></li>
+<li><img src="/img/%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF.png" srcset="/img/loading.gif" lazyload alt="人口增长率趋势"></li>
+<li><img src="/img/%E7%94%B7%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF.png" srcset="/img/loading.gif" lazyload alt="男性人口变化趋势"></li>
+<li><img src="/img/%E5%A5%B3%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF.png" srcset="/img/loading.gif" lazyload alt="女性人口变化趋势"></li>
+<li><img src="/img/%E7%94%B7%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF.png" srcset="/img/loading.gif" lazyload alt="男性人口增长率趋势"></li>
+<li><img src="/img/%E5%A5%B3%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF.png" srcset="/img/loading.gif" lazyload alt="女性人口增长率趋势"></li>
+<li><img src="/img/%E7%94%B7%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF(2020%E4%BB%A5%E6%9D%A5).png" srcset="/img/loading.gif" lazyload alt="男性人口变化趋势(2020以来)"></li>
+<li><img src="/img/%E5%A5%B3%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96%E8%B6%8B%E5%8A%BF(2020%E4%BB%A5%E6%9D%A5).png" srcset="/img/loading.gif" lazyload alt="女性人口变化趋势(2020以来)"></li>
+<li><img src="/img/%E7%94%B7%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF(2020%E4%BB%A5%E6%9D%A5).png" srcset="/img/loading.gif" lazyload alt="男性人口增长率趋势(2020以来)"></li>
+<li><img src="/img/%E5%A5%B3%E6%80%A7%E4%BA%BA%E5%8F%A3%E5%A2%9E%E9%95%BF%E7%8E%87%E8%B6%8B%E5%8A%BF(2020%E4%BB%A5%E6%9D%A5).png" srcset="/img/loading.gif" lazyload alt="女性人口增长率趋势(2020以来)"></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" class="print-no-link">#数据可视化</a>
+      
+        <a href="/tags/%E4%BA%BA%E5%8F%A3%E5%8F%98%E5%8C%96/" class="print-no-link">#人口变化</a>
+      
+        <a href="/tags/Python/" class="print-no-link">#Python</a>
+      
+        <a href="/tags/Matplotlib/" class="print-no-link">#Matplotlib</a>
+      
+        <a href="/tags/CSV/" class="print-no-link">#CSV</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" class="print-no-link">#数据分析</a>
+      
+        <a href="/tags/%E7%BB%9F%E8%AE%A1%E5%AD%A6/" class="print-no-link">#统计学</a>
+      
+        <a href="/tags/%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/" class="print-no-link">#网络爬虫</a>
+      
+        <a href="/tags/%E4%BD%BF%E7%94%A8AI%E8%BE%85%E5%8A%A9/" class="print-no-link">#使用AI辅助</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/" class="print-no-link">#数据处理</a>
+      
+        <a href="/tags/%E4%BA%8B%E5%AE%9E%E6%A0%B8%E6%9F%A5/" class="print-no-link">#事实核查</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>我国人口变化数据可视化</div>
+      <div>https://qzyz-wuyuchen.github.io/2026/08/06/我国人口变化数据可视化/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Wu Yuchen</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年8月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/07/19/%E7%AE%80%E7%88%B1/" title="简爱">
+                        <span class="hidden-mobile">简爱</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+      <a href="https://icp.gov.moe/?keyword=20262433" target="_blank">萌ICP备20262433号</a><br>
+<img width="672" height="96" src="https://count.getloli.com/@wyc.blog?name=wyc.blog&theme=booru-jaypee&padding=7&offset=0&align=top&scale=2&pixelated=1&darkmode=auto" srcset="/img/loading.gif" lazyload alt="wyc.blog">
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

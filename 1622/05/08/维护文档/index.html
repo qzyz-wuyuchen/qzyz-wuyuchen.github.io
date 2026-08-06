@@ -27,7 +27,7 @@
 <meta property="og:description" content="Hexo 博客文章发布与维护技术文档本文档基于 Hexo + GitHub Pages 环境，详细说明博客文章的创建、编辑、发布、更新及删除等完整生命周期操作。适用于已搭建好 Hexo 博客的维护者。  1. 前置条件 本地已安装 Node.js、Git 和 Hexo CLI。 博客项目已初始化，并与 GitHub Pages 仓库关联完成。 基础命令可在终端正常执行。   若尚未搭建环境，请先参">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="1622-05-07T22:19:33.000Z">
-<meta property="article:modified_time" content="2026-07-19T06:08:42.554Z">
+<meta property="article:modified_time" content="2026-08-06T07:41:22.504Z">
 <meta property="article:author" content="Wu Yuchen">
 <meta property="article:tag" content="Hexo">
 <meta property="article:tag" content="使用AI辅助">
@@ -403,8 +403,40 @@
 <p><code>title</code> 和 <code>date</code> 为必填项，<code>tags</code>、<code>categories</code>、<code>permalink</code> 等为可选，可根据需要补充。</p>
 <hr>
 <h2 id="3-编辑文章内容"><a href="#3-编辑文章内容" class="headerlink" title="3. 编辑文章内容"></a>3. 编辑文章内容</h2><p>使用 Markdown 编辑器打开生成的 <code>.md</code> 文件，在第二个 <code>---</code> 下方编写正文。</p>
-<h3 id="3-1-Front-matter-常用字段"><a href="#3-1-Front-matter-常用字段" class="headerlink" title="3.1 Front-matter 常用字段"></a>3.1 Front-matter 常用字段</h3><p>| 字段 | 说明 | 示例 |</p>
-<p>|——|——|——|<br>| <code>title</code> | 文章标题 | <code>我的第一篇文章</code> |<br>| <code>date</code> | 发布日期，格式 <code>YYYY-MM-DD HH:mm:ss</code> | <code>2026-07-11 08:30:00</code> |<br>| <code>tags</code> | 标签，支持数组或逗号分隔 | <code>[Hexo, 教程]</code> |<br>| <code>categories</code> | 分类 | <code>技术</code> |<br>| <code>permalink</code> | 自定义文章永久链接（可选） | <code>/my-custom-url/</code> |</p>
+<h3 id="3-1-Front-matter-常用字段"><a href="#3-1-Front-matter-常用字段" class="headerlink" title="3.1 Front-matter 常用字段"></a>3.1 Front-matter 常用字段</h3><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>title</code></td>
+<td>文章标题</td>
+<td><code>我的第一篇文章</code></td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>发布日期，格式 <code>YYYY-MM-DD HH:mm:ss</code></td>
+<td><code>2026-07-11 08:30:00</code></td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td>标签，支持数组或逗号分隔</td>
+<td><code>[Hexo, 教程]</code></td>
+</tr>
+<tr>
+<td><code>categories</code></td>
+<td>分类</td>
+<td><code>技术</code></td>
+</tr>
+<tr>
+<td><code>permalink</code></td>
+<td>自定义文章永久链接（可选）</td>
+<td><code>/my-custom-url/</code></td>
+</tr>
+</tbody></table>
 <p>添加 <code>permalink</code> 后，文章访问地址将固定为此值，不受后续修改日期或标题的影响。</p>
 <hr>
 <h2 id="4-本地预览"><a href="#4-本地预览" class="headerlink" title="4. 本地预览"></a>4. 本地预览</h2><p>编辑完成后，务必先在本地查看效果：</p>
@@ -640,7 +672,7 @@
   
     <div class="footer-content">
       <a href="https://icp.gov.moe/?keyword=20262433" target="_blank">萌ICP备20262433号</a><br>
-<img width="448" height="64" src="https://count.getloli.com/@wyc.blog?name=wyc.blog&theme=booru-jaypee&padding=7&offset=0&align=top&scale=1&pixelated=1&darkmode=auto" srcset="/img/loading.gif" lazyload alt="wyc.blog">
+<img width="672" height="96" src="https://count.getloli.com/@wyc.blog?name=wyc.blog&theme=booru-jaypee&padding=7&offset=0&align=top&scale=2&pixelated=1&darkmode=auto" srcset="/img/loading.gif" lazyload alt="wyc.blog">
     </div>
   
   
