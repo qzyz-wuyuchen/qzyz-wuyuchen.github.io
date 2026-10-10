@@ -1,0 +1,40 @@
+/* 黑幕（剧透遮挡）：PC 悬停 / 键盘聚焦 / 移动端长按后显示
+   由 _config.fluid.yml 的 custom_css 注入，不要直接改主题源码。 */
+.heimu {
+  background: #000;
+  color: #000;              /* 黑底黑字，视觉上被涂黑 */
+  border-radius: 2px;
+  padding: 0 .12em;
+  cursor: help;
+  transition: color .12s ease 0s;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;        /* 防止长按选择文字；想允许复制可去掉 */
+}
+
+/* 暗色模式下页面底色本身很深，给黑幕加一圈内描边以区分边界 */
+html[data-user-color-scheme="dark"] .heimu {
+  background: #05070c;
+  color: #05070c;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .12) inset;
+}
+
+/* PC：悬停约 450ms 后显示 */
+@media (hover: hover) and (pointer: fine) {
+  .heimu:hover,
+  .heimu:focus-visible {
+    color: #fff;
+    transition-delay: .45s;
+  }
+}
+
+/* 移动端长按后由 heimu.js 添加此类 */
+.heimu.is-revealed {
+  color: #fff;
+  transition-delay: 0s;
+}
+
+.heimu:focus-visible {
+  outline: 2px solid #4c9ffe;
+  outline-offset: 2px;
+}
